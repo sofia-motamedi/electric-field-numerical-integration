@@ -23,19 +23,19 @@
 
 * Rectangle Method (Midpoint Rule): Computes the integral by calculating the midpoint of 10,000 subintervals. The script outputs a vertical electric field of $1.0483 \times 10^{10}$ N/C.
 <br>
-<img src="images/fig_rectangle.png" width="600" alt="Rectangle Method (Midpoint Rule) Diagram">
+<img src="figures/fig_rectangle.png" width="600" alt="Rectangle Method (Midpoint Rule) Diagram">
 
 * Trapezoidal Rule: Approximates the integral region using trapezoids across 10,000 subintervals. The script calculates a field of $1.0483 \times 10^{10}$ N/C.
 <br>
-<img src="images/fig_trapezoid.png" width="600" alt="Trapezoidal Rule Diagram">
+<img src="figures/fig_trapezoid.png" width="600" alt="Trapezoidal Rule Diagram">
 
 * Simpson's Rule: Approximates the curve using parabolic arcs, requiring an even number of subintervals (10,000 used). The numerical result matches at $1.0483 \times 10^{10}$ N/C.
 <br>
-<img src="images/fig_simpson.png" width="600" alt="Simpson's Rule Diagram">
+<img src="figures/fig_simpson.png" width="600" alt="Simpson's Rule Diagram">
 
 * Gaussian Quadrature: Utilizes Legendre polynomials with 4 sample points for high-precision integration. The integral evaluates to approximately $0.2916$, yielding an electric field of $1.0484 \times 10^{10}$ N/C.
 <br>
-<img src="images/fig_gauss.png" width="600" alt="Gaussian Quadrature Diagram">
+<img src="figures/fig_gauss.png" width="600" alt="Gaussian Quadrature Diagram">
 
 ## Conclusion
 * For this specific interval $[-1, 1]$ and relatively simple function, Simpson's Rule is the easiest to implement and the most straightforward for controlling interval divisions and estimating errors.
