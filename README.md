@@ -2,7 +2,7 @@
 
 ## Problem Statement
 * A thin strip of length 2 meters is located along the x-axis from $x=-1$ to $x=1$.
-* The non-uniform linear charge density is described by the function $\lambda(x)=\lambda_0(1+x^2)$, where $\lambda_0=1$ C/m.
+* The non-uniform linear charge density is described by the function $\lambda(x)=\lambda_0(1+x^2)$, where $\lambda_0=2$ C/m.
 * The objective is to calculate the vertical component of the electric field ($E_y$) at a point on the y-axis, located at a distance $d=2$ meters from the center of the strip.
 
 ## Analytical Formulation
@@ -11,7 +11,7 @@
 * The distance from the charge element to the observation point is $r = \sqrt{x^2+d^2}$.
 * Due to symmetry, the horizontal components cancel out entirely, leaving only the vertical component to be integrated: 
   $$dE_y = \frac{1}{4\pi\epsilon_0}\frac{\lambda(x)dx}{(x^2+d^2)}\frac{d}{\sqrt{x^2+d^2}} = \frac{1}{4\pi\epsilon_0}\frac{\lambda(x)d~dx}{(x^2+d^2)^{3/2}}$$
-* Substituting $d=2$ and $\lambda_0=1$, the total vertical electric field is evaluated as:
+* Substituting $d=2$ and $\lambda_0=2$, the total vertical electric field is evaluated as:
   $$E_y = \frac{4}{4\pi\epsilon_0}\int_{-1}^{1}\frac{1+x^2}{(x^2+4)^{3/2}}dx$$
 * By splitting the numerator using $1+x^2 = (x^2+4)-3$, the integral simplifies to two parts:
   $$\frac{1}{\sqrt{x^2+4}} - \frac{3}{(x^2+4)^{3/2}}$$
