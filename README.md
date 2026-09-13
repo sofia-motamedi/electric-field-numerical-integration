@@ -1,78 +1,137 @@
-<h1>Numerical Computation of Electric Field from a Line Charge</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Numerical Computation of Electric Field from a Line Charge</title>
+  </head>
+  <body>
 
-<p>
-This project computes the vertical component of the electric field <em>E<sub>y</sub></em> at a point on the <em>y</em>-axis
-due to a finite, non-uniformly charged line segment along the <em>x</em>-axis.
-The line extends from <code>x = -1</code> m to <code>x = +1</code> m, and the linear charge density is given by:
-</p>
+    <h1>Numerical Computation of Electric Field from a Non-Uniform Line Charge</h1>
 
-<p style="font-size: 110%;">
-\[
-\lambda(x) = \lambda_0 (1 + x^2)
-\]
-</p>
+    <p><strong>Author:</strong> Sofia Motamedi<br />
+       <strong>Institution:</strong> Amirkabir University of Technology (Tehran Polytechnic)</p>
 
-<p>
-where \(\lambda_0\) is a constant with units of charge per meter.
-We compute the electric field at the point \((0, d)\) with \(d = 2\) m.
-Using Coulomb's law and symmetry, only the vertical component of the electric field survives after integration.
-The resulting integral for <em>E<sub>y</sub></em> is:
-</p>
+    <hr />
 
-<p style="font-size: 110%;">
-\[
-E_y = \frac{2 d}{4 \pi \varepsilon_0} \int_{-1}^{1} \frac{1 + x^2}{(x^2 + d^2)^{3/2}} \, dx
-\]
-</p>
+    <h2>Problem description</h2>
 
-<p>
-For \(d = 2\) m and \(\varepsilon_0 = 8.85418782 \times 10^{-12} \, \text{F/m}\), the analytical solution is:
-</p>
+    <p>
+      We consider a thin charged rod of length <code>L = 2 m</code> lying along the x-axis,
+      from <code>x = -1 m</code> to <code>x = +1 m</code>. The linear charge density is
+      non-uniform and given by:
+    </p>
 
-<p style="font-size: 110%;">
-\[
-E_y = \frac{\lambda_0}{\pi \varepsilon_0} \left[ 2 \ln(1 + \sqrt{5}) - \frac{2}{\sqrt{5}} \right]
-\approx 1.05 \times 10^{10} \, \text{N/C}
-\]
-</p>
+    <p>
+      <code>λ(x) = λ₀ (1 + x²)</code>
+    </p>
 
-<hr />
+    <p>
+      where <code>λ₀</code> is a constant with units of charge per meter.
+      We want to compute the vertical component of the electric field,
+      <code>E<sub>y</sub></code>, at the point on the y-axis located at
+      <code>(0, d)</code> with <code>d = 2 m</code>.
+    </p>
 
-<h2>Numerical methods implemented</h2>
+    <p>
+      Using Coulomb's law, the contribution of a small charge element
+      <code>dQ = λ(x) dx</code> at position <code>x</code> to the electric field at
+      <code>(0, d)</code> is:
+    </p>
 
-<p>
-The integral
-\[
-\int_{-1}^{1} \frac{1 + x^2}{(x^2 + d^2)^{3/2}} \, dx
-\]
-is approximated using several classical numerical integration techniques:
-</p>
+    <p>
+      <code>dE = (1 / (4 π ε₀)) · (dQ / r²)</code>
+    </p>
 
-<ul>
-  <li><strong>Midpoint (Rectangle) Rule</strong> – implemented in <code>rectangle.py</code></li>
-  <li><strong>Trapezoidal Rule</strong> – implemented in <code>trapezoid.py</code></li>
-  <li><strong>Simpson's Rule</strong> – implemented in <code>simpson.py</code></li>
-  <li><strong>Gaussian Quadrature (Legendre)</strong> – implemented in <code>gauss_quadrature.py</code></li>
-</ul>
+    <p>
+      where <code>r = √(x² + d²)</code> is the distance from the element to the point.
+      By symmetry, only the vertical component survives after integration, and the
+      vertical component is:
+    </p>
 
-<p>
-Each method computes the same integral and then uses the factor
-\[
-\frac{2 d}{4 \pi \varepsilon_0}
-\]
-to obtain the vertical electric field <em>E<sub>y</sub></em>.
-All methods converge to approximately
-\[
-E_y \approx 1.048 \times 10^{10} \, \text{N/C},
-\]
-which agrees very well with the analytical result.
-</p>
+    <p>
+      <code>dE<sub>y</sub> = (1 / (4 π ε₀)) · (λ(x) dx · d / (x² + d²)^(3/2))</code>
+    </p>
 
-<hr />
+    <p>
+      Therefore, the total vertical electric field is:
+    </p>
 
-<h2>Project structure</h2>
+    <p>
+      <code>
+        E<sub>y</sub> =
+        (2 d / (4 π ε₀)) ∫<sub>x = -1</sub><sup>1</sup>
+        (1 + x²) / (x² + d²)^(3/2) dx
+      </code>
+    </p>
 
-<pre>
+    <p>
+      In this project, we set <code>d = 2 m</code> and
+      <code>ε₀ = 8.85418782 × 10⁻¹² F/m</code>.
+    </p>
+
+    <hr />
+
+    <h2>Analytical solution</h2>
+
+    <p>
+      The integral can be evaluated analytically. After simplification, the result
+      for <code>E<sub>y</sub></code> can be written in the form:
+    </p>
+
+    <p>
+      <code>
+        E<sub>y</sub> =
+        (λ₀ / (π ε₀)) ·
+        [ 2 ln(1 + √5) − 2 / √5 ]
+      </code>
+    </p>
+
+    <p>
+      Numerically, this gives approximately:
+    </p>
+
+    <p>
+      <code>E<sub>y</sub> ≈ 1.05 × 10¹⁰ N/C</code>
+    </p>
+
+    <hr />
+
+    <h2>Numerical methods implemented</h2>
+
+    <p>
+      The integral
+      <code>
+        ∫<sub>-1</sub><sup>1</sup> (1 + x²) / (x² + d²)^(3/2) dx
+      </code>
+      is approximated using several classical numerical integration techniques:
+    </p>
+
+    <ul>
+      <li><strong>Midpoint (Rectangle) Rule</strong> – implemented in <code>rectangle.py</code></li>
+      <li><strong>Trapezoidal Rule</strong> – implemented in <code>trapezoid.py</code></li>
+      <li><strong>Simpson's Rule</strong> – implemented in <code>simpson.py</code></li>
+      <li><strong>Gaussian Quadrature (Legendre)</strong> – implemented in <code>gauss_quadrature.py</code></li>
+    </ul>
+
+    <p>
+      Each method computes the same integral and then multiplies by the factor
+      <code>(2 d) / (4 π ε₀)</code> to obtain the vertical electric field
+      <code>E<sub>y</sub></code>. All methods converge to approximately:
+    </p>
+
+    <p>
+      <code>E<sub>y</sub> ≈ 1.048 × 10¹⁰ N/C</code>
+    </p>
+
+    <p>
+      which agrees very well with the analytical result.
+    </p>
+
+    <hr />
+
+    <h2>Project structure</h2>
+
+    <pre>
 electric-field-numerical-integration/
 ├── rectangle.py
 ├── trapezoid.py
@@ -83,81 +142,21 @@ electric-field-numerical-integration/
 ├── fig_simpson.png
 ├── fig_gauss.png
 └── README.md
-</pre>
+    </pre>
 
-<hr />
+    <hr />
 
-<h2>Figures</h2>
+    <h2>Figures</h2>
 
-<p>
-Below are the visualizations of the integrand and the numerical schemes used.
-</p>
-
-<h3>Midpoint (Rectangle) Rule</h3>
-<p>
-<img src="fig_rectangle.png" alt="Rectangle Method (Midpoint Rule) Diagram" width="600" />
-</p>
-
-<h3>Trapezoidal Rule</h3>
-<p>
-<img src="fig_trapezoid.png" alt="Trapezoidal Rule Diagram" width="600" />
-</p>
-
-<h3>Simpson's Rule</h3>
-<p>
-<img src="fig_simpson.png" alt="Simpson's Rule Diagram" width="600" />
-</p>
-
-<h3>Gaussian Quadrature</h3>
-<p>
-<img src="fig_gauss.png" alt="Gaussian Quadrature Diagram" width="600" />
-</p>
-
-<hr />
-
-<h2>How to run the code</h2>
-
-<ol>
-  <li><strong>Clone the repository</strong>:
-    <pre><code>git clone https://github.com/&lt;your-username&gt;/electric-field-numerical-integration.git
-cd electric-field-numerical-integration
-</code></pre>
-  </li>
-
-  <li><strong>Run each method</strong> (requires Python 3 and <code>numpy</code>, <code>matplotlib</code> for plotting):
-    <pre><code>python rectangle.py
-python trapezoid.py
-python simpson.py
-python gauss_quadrature.py
-</code></pre>
-  </li>
-
-  <li><strong>Compare outputs</strong>:
     <p>
-    Each script prints the numerical value of <em>E<sub>y</sub></em> at the point \((0, 2)\) m.
-    The values should be very close to each other and to the analytical result
-    \(E_y \approx 1.05 \times 10^{10} \, \text{N/C}\).
+      Below are the visualizations of the integrand and the numerical schemes used.
+      Make sure the image filenames in the repository match those used here.
     </p>
-  </li>
-</ol>
+    <h3>Midpoint (Rectangle) Rule</h3>
+    <p>
+      <img src="fig_rectangle.png"
+           alt="Rectangle Method (Midpoint Rule) Diagram"
+           width="600" />
+    </p>
 
-<hr />
-
-<h2>Discussion</h2>
-<p>
-For this problem, with a relatively simple integrand and a finite interval \([-1, 1]\),
-Simpson's rule offers an excellent balance between accuracy and implementation simplicity.
-It is easy to control the error by increasing the number of subintervals, and the code remains
-compact and readable.
-</p>
-
-<p>
-Gaussian quadrature can achieve high accuracy with fewer evaluation points, which is useful
-when function evaluations are expensive. However, for teaching, demonstration, and clarity,
-Simpson's rule is often preferred.
-</p>
-
-<p>
-This project demonstrates how different numerical integration techniques can be applied to a
-real physics problem (electrostatics) and how their results compare to an exact analytical solution.
-</p>
+    <h3>
